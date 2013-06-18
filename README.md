@@ -1,3 +1,5 @@
+**This project is a work in progress - please come back later to see it in all its glory!**
+
 Shinobi Charts/Grids/Essentials Project Title (Objective-C/Xamarin/Android)
 =====================
 
