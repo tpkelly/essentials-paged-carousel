@@ -12,7 +12,7 @@ Building the project
 
 In order to build this project you'll need a copy of ShinobiCharts/Grids/Essentials. If you don't have it yet, you can download a free trial from the [ShinobiCharts/Grids/Essentials website](link to appropriate section).
 
-Once you've downloaded and unzipped ShinobiCharts/Grids/Essentials, open up the project in XCode, and drag ShinobiCharts/Grids/Essentials.embeddedframework from the finder into Xcode's 'frameworks' group, and XCode will sort out all the header and linker paths for you.
+Once you've downloaded and unzipped ShinobiCharts/Grids/Essentials, open up the project in Xcode, and drag ShinobiCharts/Grids/Essentials.embeddedframework from the finder into Xcode's 'frameworks' group, and Xcode will sort out all the header and linker paths for you.
 
 **Delete the inappropriate sections (and alter the chart/grid name in the sample code if appropriate):**
 
