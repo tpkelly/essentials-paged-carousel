@@ -5,7 +5,7 @@ This project demonstrates how to build a paged carousel using ShinobiEssentials,
 
 ![Screenshot](screenshot.png?raw=true)
 
-The PagedCarouselHelper class is reusable with lightweight views ()
+You can reuse PagedCarouselHelper in your own projects, as long as your views can all be created up front - see [Using PagedCarouselHelper](#PagedCarouselHelper).
 
 Building the project
 ------------------
@@ -26,6 +26,7 @@ If you’re using the trial version you’ll need to add your license key. To do
         …
     }
 
+<a name="PagedCarouselHelper"/>
 Using PagedCarouselHelper
 ------------------
 Here's how to use PagedCarouselHelper in your own project:
