@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>52D08864-457F-4C94-8C5E-97D1F5049017</string>
+	<key>IDESourceControlProjectName</key>
+	<string>PagedCarousel</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D47C1518-5CC9-46F7-96ED-732694DD176E</key>
+		<string>https://github.com/alisonrclarke/essentials-paged-carousel.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>PagedCarousel.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D47C1518-5CC9-46F7-96ED-732694DD176E</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/alisonrclarke/essentials-paged-carousel.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D47C1518-5CC9-46F7-96ED-732694DD176E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D47C1518-5CC9-46F7-96ED-732694DD176E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>essentials-paged-carousel</string>
+		</dict>
+	</array>
+</dict>
+</plist>

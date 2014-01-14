@@ -1,28 +1,18 @@
-**This project is a work in progress - please come back later to see it in all its glory!**
-
-Shinobi Charts/Grids/Essentials/Gauges Project Title (Objective-C/Xamarin/Android)
+ShinobiEssentials Paged Carousel (Objective-C)
 =====================
 
-Description of project (include link to blog post if there is one)
+This project demonstrates how to build a paged carousel using ShinobiEssentials, and provides a simple helper class (PagedCarouselHelper) which is reusable in your own projects.
 
 ![Screenshot](screenshot.png?raw=true)
+
+The PagedCarouselHelper class is reusable with lightweight views ()
 
 Building the project
 ------------------
 
-In order to build this project you'll need a copy of ShinobiCharts/Grids/Essentials/Gauges. If you don't have it yet, you can download a free trial from the [ShinobiCharts/Grids/Essentials/Gauges website](link to appropriate section).
+In order to build this project you'll need a copy of ShinobiEssentials. If you don't have it yet, you can download a free trial from the [ShinobiEssentials website](http://www.shinobicontrols.com/ios/shinobiessentials/).
 
-If you've used the installer to install ShinobiCharts/Grids/Essentials/Gauges, the project should just work. If you haven't, then once you've downloaded and unzipped ShinobiCharts/Grids/Essentials/Gauges, open up the project in Xcode, and drag ShinobiCharts/Grids/Essentials/Gauges.framework from the finder into Xcode's 'frameworks' group, and Xcode will sort out all the header and linker paths for you.
-
-**Delete the inappropriate sections (and alter the chart/grid name in the sample code if appropriate):**
-
-If you're using the trial version you'll need to add your license key. To do so, open up ViewController.m and add the following line after the chart is initialised:
-
-    chart.licenseKey=@"your license key";
-
-If you're using the trial version you'll need to add your license key. To do so, open up ViewController.m and add the following line after the grid is initialised:
-
-    grid.licenseKey=@"your license key";
+If you've used the installer to install ShinobiEssentials, the project should just work. If you haven't, then once you've downloaded and unzipped ShinobiEssentials, open up the project in Xcode, and drag ShinobiEssentials.framework from the finder into Xcode's 'frameworks' group, and Xcode will sort out all the header and linker paths for you.
 
 If you’re using the trial version you’ll need to add your license key. To do so, open up AppDelegate.m, import <ShinobiEssentials/ShinobiEssentials.h>, and set the license key inside application:didFinishLaunchingWithOptions: as follows:
 
@@ -36,17 +26,20 @@ If you’re using the trial version you’ll need to add your license key. To do
         …
     }
 
-If you’re using the trial version you’ll need to add your license key. To do so, open up AppDelegate.m, import <ShinobiGauges/ShinobiGauges.h>, and set the license key inside application:didFinishLaunchingWithOptions: as follows:
+Using PagedCarouselHelper
+------------------
+Here's how to use PagedCarouselHelper in your own project:
 
-    #import <ShinobiGauges/ShinobiGauges.h>
+1. Add a carousel to your view. You'll need to use a specific subclass of SEssentialsCarousel - see the [SEssentialsCarousel overview](http://www.shinobicontrols.com/docs/ShinobiControls/ShinobiEssentials/2.5.1/Standard/Normal/Classes/SEssentialsCarousel.html#overview) for a list of carousel types. 
+2. Add a page control to your view.
+3. Create the views you want to display inside the carousel.
+4. Add the PagedCarouselHelper.h and PagedCarouselHelper.m files to your project.
+5. Create a PagedCarouselHelper instance, and set its carousel, pageControl and carouselViews property.
+6. Sit back and be amazed at the awesomeness of your paged carousel.
 
-    @implementation AppDelegate
+You might want to tweak your carousel settings to improve the way the carousel and page control interact - see ViewController.m for some ideas.
 
-    - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-    {
-        [ShinobiGauges setLicenseKey:@"your license key"];
-        …
-    }
+Note that PagedCarouselHelper adds itself as the carousel's delegate, so if you want to use any other delegate methods, then add them to PagedCarouselHelper (or subclass it).
 
 Contributing
 ------------

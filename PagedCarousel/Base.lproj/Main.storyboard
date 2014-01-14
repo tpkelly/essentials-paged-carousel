@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xKP-XR-H2A"/>
+                        <viewControllerLayoutGuide type="bottom" id="b23-TR-fNM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="ZOp-Wi-O9q">
+                                <rect key="frame" x="184" y="937" width="400" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="B9G-i3-cpP"/>
+                                    <constraint firstAttribute="width" constant="400" id="ohX-tJ-z8N"/>
+                                </constraints>
+                                <color key="pageIndicatorTintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="currentPageIndicatorTintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </pageControl>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2IL-1l-FQq" customClass="SEssentialsCarouselCylindrical">
+                                <rect key="frame" x="0.0" y="20" width="768" height="907"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2IL-1l-FQq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4zh-PQ-7Mh"/>
+                            <constraint firstItem="ZOp-Wi-O9q" firstAttribute="top" secondItem="2IL-1l-FQq" secondAttribute="bottom" constant="10" id="9hb-6e-9xO"/>
+                            <constraint firstItem="ZOp-Wi-O9q" firstAttribute="centerX" secondItem="2IL-1l-FQq" secondAttribute="centerX" id="9j0-ZS-vMK"/>
+                            <constraint firstItem="b23-TR-fNM" firstAttribute="top" secondItem="ZOp-Wi-O9q" secondAttribute="bottom" constant="50" id="X6v-0H-Ibc"/>
+                            <constraint firstItem="ZOp-Wi-O9q" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bRn-WE-smZ"/>
+                            <constraint firstItem="2IL-1l-FQq" firstAttribute="top" secondItem="xKP-XR-H2A" secondAttribute="bottom" id="hLf-0K-etj"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="carousel" destination="2IL-1l-FQq" id="rGA-jk-l8n"/>
+                        <outlet property="pageControl" destination="ZOp-Wi-O9q" id="YFH-tN-OnQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackOpaque"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>
