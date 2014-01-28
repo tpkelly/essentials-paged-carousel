@@ -21,9 +21,25 @@
 
 #import "PagedCarouselHelper.h"
 
-@implementation PagedCarouselHelper
+@implementation PagedCarouselHelper {
+    NSMutableArray *_carouselViews;
+}
 
--(void)setCarousel:(SEssentialsCarouselCylindrical *)carousel
+// Initialize a PagedCarouselHelper with a carousel and a pageControl
+-(id) initWithCarousel:(SEssentialsCarousel *)carousel pageControl:(UIPageControl *)pageControl
+{
+    self = [super init];
+    if (self)
+    {
+        self.carousel = carousel;
+        self.pageControl = pageControl;
+        _carouselViews = [[NSMutableArray alloc] init];
+    }
+    return self;
+}
+
+// Set the PagedCarouselHelper's carousel
+-(void)setCarousel:(SEssentialsCarousel *)carousel
 {
     _carousel = carousel;
     
@@ -32,30 +48,43 @@
     _carousel.dataSource = self;
 }
 
--(void)setCarouselViews:(NSArray *)carouselViews
-{
-    _carouselViews = carouselViews;
-    
-    // Update the page control and carousel to reflect the new array
-    self.pageControl.numberOfPages = [self.carouselViews count];
-    [self.carousel reloadData];
-}
-
+// Set the PagedCarouselHelper's pageControl
 -(void)setPageControl:(UIPageControl *)pageControl
 {
     _pageControl = pageControl;
     
     // Set up the number of pages and the current page
-    _pageControl.numberOfPages = [self.carouselViews count];
+    _pageControl.numberOfPages = [_carouselViews count];
     _pageControl.currentPage = self.carousel.contentOffset;
     
     // Set a target so that when the page value changes we update the carousel
     [_pageControl addTarget:self action:@selector(pageChange:) forControlEvents:UIControlEventValueChanged];
 }
 
+// Add a UIView to the carousel
+-(void)addView:(UIView *)view
+{
+    [_carouselViews addObject:view];
+    [self updateViews];
+}
+
+// Add an array of UIViews to the carousel
+-(void)addViews:(NSArray *)views
+{
+    [_carouselViews addObjectsFromArray:views];
+    [self updateViews];
+}
+
+// Update the page control and carousel to reflect the updated views
+-(void)updateViews
+{
+    self.pageControl.numberOfPages = [_carouselViews count];
+    [self.carousel reloadData];
+}
+
+// Update the carousel value when the page control value is changed
 -(void)pageChange:(id)sender
 {
-    // Update the carousel value when the page control value is changed
     [self.carousel setContentOffset:self.pageControl.currentPage animated:YES withDuration:0.5];
 }
 
@@ -63,12 +92,12 @@
 
 -(NSUInteger)numberOfItemsInCarousel:(SEssentialsCarousel *)carousel
 {
-    return [self.carouselViews count];
+    return [_carouselViews count];
 }
 
 -(UIView *)carousel:(SEssentialsCarousel *)carousel itemAtIndex:(int)index
 {
-    return self.carouselViews[index];
+    return _carouselViews[index];
 }
 
 #pragma mark - SEssentialsCarouselDelegate methods

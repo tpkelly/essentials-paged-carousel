@@ -24,8 +24,11 @@
 
 @interface PagedCarouselHelper : NSObject<SEssentialsCarouselDataSource, SEssentialsCarouselDelegate>
 
-@property (strong, nonatomic) SEssentialsCarouselCylindrical *carousel;
+@property (strong, nonatomic) SEssentialsCarousel *carousel;
 @property (strong, nonatomic) UIPageControl *pageControl;
-@property (strong, nonatomic) NSArray *carouselViews;
+
+-(id) initWithCarousel:(SEssentialsCarousel*)carousel pageControl:(UIPageControl*)pageControl;
+-(void) addView:(UIView*)view;
+-(void) addViews:(NSArray*)views;
 
 @end

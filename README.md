@@ -1,11 +1,11 @@
 ShinobiEssentials Paged Carousel (Objective-C)
 =====================
 
-This project demonstrates how to build a paged carousel using ShinobiEssentials, and provides a simple helper class (PagedCarouselHelper) which is reusable in your own projects.
+This project demonstrates how to build a paged carousel using ShinobiEssentials, and provides a simple helper class (`PagedCarouselHelper`) which is reusable in your own projects.
 
 ![Screenshot](screenshot.png?raw=true)
 
-You can reuse PagedCarouselHelper in your own projects, as long as your views can all be created up front - see [Using PagedCarouselHelper](#PagedCarouselHelper).
+You can reuse `PagedCarouselHelper` in your own projects - see [Using PagedCarouselHelper](#PagedCarouselHelper).
 
 Building the project
 ------------------
@@ -29,18 +29,18 @@ If you’re using the trial version you’ll need to add your license key. To do
 <a name="PagedCarouselHelper"/>
 Using PagedCarouselHelper
 ------------------
-Here's how to use PagedCarouselHelper in your own project:
+Here's how to use `PagedCarouselHelper` in your own project:
 
-1. Add a carousel to your view. You'll need to use a specific subclass of SEssentialsCarousel - see the [SEssentialsCarousel overview](http://www.shinobicontrols.com/docs/ShinobiControls/ShinobiEssentials/2.5.1/Standard/Normal/Classes/SEssentialsCarousel.html#overview) for a list of carousel types. 
+1. Add a carousel to your view. You'll need to use a specific subclass of `SEssentialsCarousel` - see the [`SEssentialsCarousel` overview](http://www.shinobicontrols.com/docs/ShinobiControls/ShinobiEssentials/2.5.1/Standard/Normal/Classes/SEssentialsCarousel.html#overview) for a list of carousel types. 
 2. Add a page control to your view.
-3. Create the views you want to display inside the carousel.
-4. Add the PagedCarouselHelper.h and PagedCarouselHelper.m files to your project.
-5. Create a PagedCarouselHelper instance, and set its carousel, pageControl and carouselViews property.
+3. Add the **PagedCarouselHelper.h** and **PagedCarouselHelper.m** files to your project.
+4. Create a `PagedCarouselHelper` instance with your carousel and page control.
+5. Create the `UIView`s for your carousel and add them to your helper - either one at a time with the `addView:` method, or all at once with `addViews:`.
 6. Sit back and be amazed at the awesomeness of your paged carousel.
 
-You might want to tweak your carousel settings to improve the way the carousel and page control interact - see ViewController.m for some ideas.
+You might want to tweak your carousel settings to improve the way the carousel and page control interact - see **ViewController.m** for some ideas.
 
-Note that PagedCarouselHelper adds itself as the carousel's delegate, so if you want to use any other delegate methods, then add them to PagedCarouselHelper (or subclass it).
+Note that `PagedCarouselHelper` adds itself as the carousel's delegate, so if you want to use any other delegate methods, then add them to `PagedCarouselHelper` (or subclass it).
 
 Contributing
 ------------
