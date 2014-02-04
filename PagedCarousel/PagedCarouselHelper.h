@@ -26,6 +26,7 @@
 
 @property (strong, nonatomic) SEssentialsCarousel *carousel;
 @property (strong, nonatomic) UIPageControl *pageControl;
+@property (nonatomic) int itemsPerPage;
 
 -(id) initWithCarousel:(SEssentialsCarousel*)carousel pageControl:(UIPageControl*)pageControl;
 -(void) addView:(UIView*)view;

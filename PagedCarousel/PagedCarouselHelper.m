@@ -23,6 +23,8 @@
 
 @implementation PagedCarouselHelper {
     NSMutableArray *_carouselViews;
+    BOOL _inPageChange;
+    float _previousOffset;
 }
 
 // Initialize a PagedCarouselHelper with a carousel and a pageControl
@@ -31,6 +33,8 @@
     self = [super init];
     if (self)
     {
+        _itemsPerPage = 1;
+        _inPageChange = NO;
         self.carousel = carousel;
         self.pageControl = pageControl;
         _carouselViews = [[NSMutableArray alloc] init];
@@ -46,6 +50,13 @@
     // Set ourself as the carousel's delegate and data source
     _carousel.delegate = self;
     _carousel.dataSource = self;
+    
+    // Fix the focus point so it's on the leftmost item
+    _carousel.focusPointNormalized = CGPointMake(0.5/(float)self.itemsPerPage, 0.5);
+    
+    // Tweaks to momentum and friction for less bumpy scrolls
+    self.carousel.momentumAnimationCurve = [SEssentialsAnimationCurve curveForCurveType:SEssentialsAnimationCurveTypeLinear];
+    self.carousel.frictionCoefficient = 1.5;
 }
 
 // Set the PagedCarouselHelper's pageControl
@@ -54,11 +65,17 @@
     _pageControl = pageControl;
     
     // Set up the number of pages and the current page
-    _pageControl.numberOfPages = [_carouselViews count];
-    _pageControl.currentPage = self.carousel.contentOffset;
+    [self updatePageControl];
     
     // Set a target so that when the page value changes we update the carousel
     [_pageControl addTarget:self action:@selector(pageChange:) forControlEvents:UIControlEventValueChanged];
+}
+
+-(void)setItemsPerPage:(int)itemsPerPage
+{
+    _itemsPerPage = itemsPerPage;
+    // Fix the focus point of the carousel so it's in the middle of the leftmost item on the page
+    _carousel.focusPointNormalized = CGPointMake(0.5/(float)self.itemsPerPage, 0.5);
 }
 
 // Add a UIView to the carousel
@@ -75,17 +92,25 @@
     [self updateViews];
 }
 
+// Update the page control to reflect the new number of views
+-(void)updatePageControl
+{
+    self.pageControl.numberOfPages = ([_carouselViews count] + self.itemsPerPage - 1) / self.itemsPerPage;
+    _pageControl.currentPage = self.carousel.contentOffset/self.itemsPerPage;
+}
+
 // Update the page control and carousel to reflect the updated views
 -(void)updateViews
 {
-    self.pageControl.numberOfPages = [_carouselViews count];
+    [self updatePageControl];
     [self.carousel reloadData];
 }
 
-// Update the carousel value when the page control value is changed
+// Scroll the carousel when the page control value is changed
 -(void)pageChange:(id)sender
 {
-    [self.carousel setContentOffset:self.pageControl.currentPage animated:YES withDuration:0.5];
+    _inPageChange = YES;
+    [self.carousel setContentOffset:self.pageControl.currentPage*self.itemsPerPage animated:YES withDuration:0.5];
 }
 
 #pragma mark - SEssentialsCarouselDataSource methods
@@ -102,9 +127,31 @@
 
 #pragma mark - SEssentialsCarouselDelegate methods
 
+-(void)carouselWillScroll:(SEssentialsCarousel *)carousel
+{
+    // Keep track of the offset at the start of the scroll, so we can work out which direction we're scrolling in
+    _previousOffset = carousel.contentOffset;
+}
+
 -(void)carousel:(SEssentialsCarousel *)carousel didFinishScrollingAtOffset:(CGFloat)offset
 {
-    self.pageControl.currentPage = offset;
+    if (_inPageChange) {
+        // The scroll was one that we started, so don't do any more work
+        _inPageChange = NO;
+    } else {
+        _inPageChange = YES;
+        // Work out which page we should be on - the nearest to the current carousel offset
+        float newPage = self.carousel.contentOffset/(float)self.itemsPerPage;
+        if (carousel.contentOffset > _previousOffset)
+        {
+            self.pageControl.currentPage = ceilf(newPage);
+        } else {
+            self.pageControl.currentPage = floorf(newPage);
+        }
+        
+        // Scroll the carousel so that the first item on the current page is the one in focus
+        [self.carousel setContentOffset:self.pageControl.currentPage*self.itemsPerPage animated:YES withDuration:0.5];
+    }
 }
 
 @end
