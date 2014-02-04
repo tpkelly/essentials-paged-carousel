@@ -26,6 +26,9 @@
 
 @property (strong, nonatomic) SEssentialsCarousel *carousel;
 @property (strong, nonatomic) UIPageControl *pageControl;
+@property (nonatomic) int itemsPerPage;
+@property (nonatomic) float itemPadding;
+@property (nonatomic, assign) SEssentialsCarouselOrientation orientation;
 
 -(id) initWithCarousel:(SEssentialsCarousel*)carousel pageControl:(UIPageControl*)pageControl;
 -(void) addView:(UIView*)view;

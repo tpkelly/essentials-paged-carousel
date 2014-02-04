@@ -23,6 +23,9 @@
 
 @implementation PagedCarouselHelper {
     NSMutableArray *_carouselViews;
+    NSMutableArray *_wrapperViews;
+    float _wrapperHeight;
+    float _wrapperWidth;
 }
 
 // Initialize a PagedCarouselHelper with a carousel and a pageControl
@@ -31,9 +34,13 @@
     self = [super init];
     if (self)
     {
+        self.itemsPerPage = 1;
+        self.itemPadding = 5;
+        self.orientation = SEssentialsCarouselOrientationHorizontal;
         self.carousel = carousel;
         self.pageControl = pageControl;
         _carouselViews = [[NSMutableArray alloc] init];
+        _wrapperViews = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -61,24 +68,86 @@
     [_pageControl addTarget:self action:@selector(pageChange:) forControlEvents:UIControlEventValueChanged];
 }
 
+-(void)setItemsPerPage:(int)itemsPerPage
+{
+    _itemsPerPage = itemsPerPage;    [self resetWrappers];
+}
+
+-(void)setItemPadding:(float)itemPadding
+{
+    _itemPadding = itemPadding;
+    [self resetWrappers];
+}
+
 // Add a UIView to the carousel
 -(void)addView:(UIView *)view
 {
     [_carouselViews addObject:view];
+    [self addViewToWrapper:view viewIndex:[_carouselViews count]-1];
     [self updateViews];
 }
 
 // Add an array of UIViews to the carousel
 -(void)addViews:(NSArray *)views
 {
-    [_carouselViews addObjectsFromArray:views];
+    for (UIView *view in views) {
+        [_carouselViews addObject:view];
+        [self addViewToWrapper:view viewIndex:[_carouselViews count]-1];
+    }
+    [self updateViews];
+}
+
+// Add the given view to a wrapper view. viewIndex should be the index of the view in _carouselViews
+-(void)addViewToWrapper:(UIView *)view viewIndex:(int)index
+{
+    // Calculate the height and width of the wrapper, based on itemsPerPage and itemPadding
+    if (!_wrapperHeight) {
+        if (self.orientation == SEssentialsCarouselOrientationHorizontal) {
+            _wrapperHeight = view.frame.size.height;
+            _wrapperWidth = (view.frame.size.width + self.itemPadding)*self.itemsPerPage - self.itemPadding;
+        } else {
+            _wrapperHeight = (view.frame.size.height + self.itemPadding)*self.itemsPerPage - self.itemPadding;
+            _wrapperWidth = view.frame.size.width;
+        }
+    }
+    
+    // Check whether we need to create a new wrapper view
+    if (index + 1 > [_wrapperViews count]*self.itemsPerPage) {
+        [_wrapperViews addObject:[[UIView alloc] initWithFrame:CGRectMake(0, 0, _wrapperWidth, _wrapperHeight)]];
+    }
+    
+    // Work out where the view should be positioned in the wrapper
+    int indexInWrapper = index % self.itemsPerPage;
+    if (self.orientation == SEssentialsCarouselOrientationHorizontal) {
+        view.center = CGPointMake((view.frame.size.width + self.itemPadding)*indexInWrapper + view.frame.size.width*0.5,
+                                  view.frame.size.height*0.5);
+    } else {
+        view.center = CGPointMake(view.frame.size.width*0.5,
+                                  (view.frame.size.height + self.itemPadding)*indexInWrapper + view.frame.size.width*0.5);
+    }
+    
+    // Add the view to the last wrapperView in our array
+    [[_wrapperViews lastObject] addSubview:view];
+}
+
+// Recreate the wrapper views (e.g. if itemsPerPage or itemPadding has changed)
+-(void)resetWrappers
+{
+    _wrapperHeight = 0;
+    _wrapperWidth = 0;
+    
+    [_wrapperViews removeAllObjects];
+    int count = 0;
+    for (UIView *view in _carouselViews) {
+        [self addViewToWrapper:view viewIndex:count++];
+    }
     [self updateViews];
 }
 
 // Update the page control and carousel to reflect the updated views
 -(void)updateViews
 {
-    self.pageControl.numberOfPages = [_carouselViews count];
+    self.pageControl.numberOfPages = [_wrapperViews count];
     [self.carousel reloadData];
 }
 
@@ -92,12 +161,12 @@
 
 -(NSUInteger)numberOfItemsInCarousel:(SEssentialsCarousel *)carousel
 {
-    return [_carouselViews count];
+    return [_wrapperViews count];
 }
 
 -(UIView *)carousel:(SEssentialsCarousel *)carousel itemAtIndex:(int)index
 {
-    return _carouselViews[index];
+    return _wrapperViews[index];
 }
 
 #pragma mark - SEssentialsCarouselDelegate methods
