@@ -36,6 +36,7 @@
     {
         self.itemsPerPage = 1;
         self.itemPadding = 5;
+        self.animationDuration = 0.5;
         self.orientation = SEssentialsCarouselOrientationHorizontal;
         self.carousel = carousel;
         self.pageControl = pageControl;
@@ -154,7 +155,7 @@
 // Update the carousel value when the page control value is changed
 -(void)pageChange:(id)sender
 {
-    [self.carousel setContentOffset:self.pageControl.currentPage animated:YES withDuration:0.5];
+    [self.carousel setContentOffset:self.pageControl.currentPage animated:YES withDuration:self.animationDuration];
 }
 
 #pragma mark - SEssentialsCarouselDataSource methods

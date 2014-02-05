@@ -23,7 +23,7 @@
 #import "PagedCarouselHelper.h"
 
 @interface ViewController ()
-@property (weak, nonatomic) IBOutlet SEssentialsCarouselLinear2D *carousel;
+@property (weak, nonatomic) IBOutlet SEssentialsCarouselLinear3D *carousel;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @end
 

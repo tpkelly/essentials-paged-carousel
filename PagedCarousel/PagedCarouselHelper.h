@@ -26,12 +26,25 @@
 
 @property (strong, nonatomic) SEssentialsCarousel *carousel;
 @property (strong, nonatomic) UIPageControl *pageControl;
+
+/** The number of views to display on each page. Defaults to 1 */
 @property (nonatomic) int itemsPerPage;
+
+/** The padding between the views on a single page, in pixels. Defaults to 5px */
 @property (nonatomic) float itemPadding;
+
+/** The orientation of the views within a page. Defaults to SEssentialsCarouselOrientationHorizontal */
 @property (nonatomic, assign) SEssentialsCarouselOrientation orientation;
 
+/** The duration in seconds of the animated scroll when the user changes page via the page control. Defaults to 0.5s */
+@property (nonatomic) float animationDuration;
+
 -(id) initWithCarousel:(SEssentialsCarousel*)carousel pageControl:(UIPageControl*)pageControl;
+
+/** Add a single view to the carousel */
 -(void) addView:(UIView*)view;
+
+/** Add an array of UIViews to the carousel. */
 -(void) addViews:(NSArray*)views;
 
 @end
