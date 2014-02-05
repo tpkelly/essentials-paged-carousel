@@ -1,11 +1,11 @@
 ShinobiEssentials Paged Carousel (Objective-C)
 =====================
 
-This project demonstrates how to build a paged carousel using ShinobiEssentials, and provides a simple helper class (`PagedCarouselHelper`) which is reusable in your own projects.
+This project provides a simple helper class (`PagedCarouselHelper`) which is reusable in your own project, and demonstrates how to use it. 
 
 ![Screenshot](screenshot.png?raw=true)
 
-You can reuse `PagedCarouselHelper` in your own projects - see [Using PagedCarouselHelper](#PagedCarouselHelper).
+See [Using PagedCarouselHelper](#PagedCarouselHelper) for more details on reusing `PagedCarouselHelper`.
 
 Building the project
 ------------------
@@ -35,12 +35,20 @@ Here's how to use `PagedCarouselHelper` in your own project:
 2. Add a page control to your view.
 3. Add the **PagedCarouselHelper.h** and **PagedCarouselHelper.m** files to your project.
 4. Create a `PagedCarouselHelper` instance with your carousel and page control.
-5. Create the `UIView`s for your carousel and add them to your helper - either one at a time with the `addView:` method, or all at once with `addViews:`.
-6. Sit back and be amazed at the awesomeness of your paged carousel.
+5. Adjust the helper properties to the behaviour you want:
+    * `itemsPerPage` determines how many views will be displayed on each page
+    * `itemPadding` adjusts the spacing between the views on a page
+    * `orientation` determines whether to line up the items within a page horizontally or vertically
+    * `animationDuration` determines how long the animated scroll takes when the user changes the page via the page control
+6. Create the `UIView`s for your carousel and add them to your helper - either one at a time with the `addView:` method, or all at once with `addViews:`.
+7. Sit back and be amazed at the awesomeness of your paged carousel.
 
 You might want to tweak your carousel settings to improve the way the carousel and page control interact - see **ViewController.m** for some ideas.
 
-Note that `PagedCarouselHelper` adds itself as the carousel's delegate, so if you want to use any other delegate methods, then add them to `PagedCarouselHelper` (or subclass it).
+A couple of things to note:
+
+* `PagedCarouselHelper` is designed to work with views that are all the same size, so it might not work as expected if you have differently sized views.
+* `PagedCarouselHelper` adds itself as the carousel's delegate, so if you want to use any other delegate methods, then add them to `PagedCarouselHelper` (or subclass it).
 
 Contributing
 ------------
